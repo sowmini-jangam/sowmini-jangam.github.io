@@ -4,141 +4,272 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Sowmini Jangam — Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{--accent:#0b76ef;--muted:#6b7280;--bg:#f7f7fb;--card:#ffffff}
-    *{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
-    body{margin:0;background:var(--bg);color:#0f1724;line-height:1.5}
-    .container{max-width:1000px;margin:40px auto;padding:24px}
-    header{display:flex;gap:18px;align-items:center}
-    .avatar{width:96px;height:96px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#7cc8ff);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:28px}
-    h1{margin:0;font-size:28px}
-    p.lead{color:var(--muted);margin:6px 0 0}
-    .top-actions{margin-left:auto;display:flex;gap:10px}
-    .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:600}
-    main{display:grid;grid-template-columns:1fr 320px;gap:20px;margin-top:28px}
-    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(12,15,30,0.06)}
-    section h2{margin:0 0 12px;font-size:16px}
-    .meta{display:flex;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:14px}
-    .skills{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-    .chip{background:#eef6ff;padding:6px 8px;border-radius:999px;font-weight:600;font-size:13px;color:var(--accent)}
-    .project{border-left:4px solid #e6eefc;padding:12px;margin-bottom:12px;border-radius:6px}
-    .project h3{margin:0;font-size:15px}
-    .project p{margin:6px 0;color:var(--muted);font-size:14px}
-    aside .small{font-size:13px;color:var(--muted)}
-    .download{display:inline-block;margin-top:12px}
-    footer{margin-top:24px;text-align:center;color:var(--muted);font-size:13px}
-    @media(max-width:880px){main{grid-template-columns:1fr} .top-actions{margin-left:0}}
+    :root{
+      --bg:#040712;
+      --card:#0c1220;
+      --primary:#4ea3ff;
+      --accent:#7bc3ff;
+      --text:#eef3ff;
+      --muted:#9da8c9;
+      --shadow:0 12px 40px rgba(0,0,0,0.5);
+    }
+    *{box-sizing:border-box;font-family:Poppins,sans-serif;margin:0;padding:0;scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text)}
+    section{padding:90px 20px;max-width:1200px;margin:auto}
+    h2{font-size:34px;margin-bottom:20px;color:var(--accent)}
+
+    /* Navbar */
+    nav{
+      position:fixed;top:0;left:0;width:100%;background:rgba(4,7,18,0.7);
+      backdrop-filter:blur(10px);padding:14px 30px;z-index:1000;
+      display:flex;justify-content:space-between;align-items:center;
+      border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+    nav a{color:var(--text);text-decoration:none;margin:0 12px;font-weight:500;transition:0.3s}
+    nav a:hover{color:var(--accent)}
+
+    /* Hero */
+    .hero{
+      height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;
+      text-align:center;padding:20px;
+      background:linear-gradient(135deg,#040712,#0b1121,#101b33,#152544);
+      animation:bgShift 15s ease-in-out infinite alternate;
+    }
+    @keyframes bgShift{
+      0%{background-position:0% 50%}
+      100%{background-position:100% 50%}
+    }
+    .hero h1{font-size:60px;font-weight:700;color:var(--accent)}
+    .hero p{font-size:22px;color:var(--muted);margin-top:12px}
+    .hero .buttons a{
+      background:var(--primary);color:#000;padding:12px 22px;border-radius:10px;
+      text-decoration:none;font-weight:600;margin:8px;display:inline-block;
+      transition:0.3s;
+    }
+    .hero .buttons a:hover{transform:translateY(-6px);background:var(--accent)}
+
+    /* Card */
+    .card{background:var(--card);padding:30px;border-radius:18px;box-shadow:var(--shadow);margin-bottom:26px}
+
+    /* Skills */
+    .skills span{
+      background:#152036;color:var(--accent);padding:8px 14px;border-radius:50px;margin:6px;
+      font-weight:600;font-size:14px;display:inline-block;
+    }
+
+    /* Expandable Project */
+    details{
+      background:#111a2e;border-radius:14px;margin-bottom:16px;padding:16px;
+      border-left:5px solid var(--primary);cursor:pointer;transition:0.3s;
+    }
+    details:hover{background:#16223d}
+    details summary{
+      font-size:20px;font-weight:600;color:var(--accent);
+      outline:none;list-style:none;
+    }
+    details summary::-webkit-details-marker{display:none}
+    .project-content{
+      margin-top:14px;color:var(--muted);line-height:1.7;font-size:15px;
+      padding-left:4px;
+    }
+
+    /* Fade animation */
+    .fade{opacity:0;transform:translateY(20px);animation:fadeIn 1s ease forwards}
+    @keyframes fadeIn{to{opacity:1;transform:translateY(0)}}
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="avatar">SJ</div>
-      <div>
-        <h1>Sowmini Jangam</h1>
-        <p class="lead">Aspiring Software Professional • Project & Program coordination • Web + Data Visualisation</p>
-        <div class="meta">
-          <span>📧 <a href="mailto:Sowminijangam@gmail.com">Sowminijangam@gmail.com</a></span>
-          <span>📱 +91‑89195‑68564</span>
-          <span>📍 Punjab, India</span>
-        </div>
-      </div>
-      <div class="top-actions">
-        <a class="btn" href="Sowmini_Resume.pdf" target="_blank" download>Download Resume</a>
-        <a class="btn" href="https://www.linkedin.com/in/sowminijangam" target="_blank" style="background:#111827">LinkedIn</a>
-        <a class="btn" href="https://github.com/sowmini-jangam" target="_blank" style="background:#0a0a0a">GitHub</a>
-      </div>
-    </header>
 
-    <main>
-      <div>
-        <section class="card">
-          <h2>About</h2>
-          <p style="color:var(--muted)">Aspiring professional with a foundation in software development and a passion for organizing, planning and delivering impactful tech projects. Experienced coordinating teams, managing timelines and aligning project goals with strategic outcomes. Strong analytical and communication skills with hands-on experience in web projects, dashboards and ML-integrated apps.</p>
-        </section>
+  <!-- NAVBAR -->
+  <nav>
+    <div style="font-weight:700;color:var(--accent);font-size:22px">Sowmini</div>
+    <div>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#certifications">Certificates</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
 
-        <section class="card" style="margin-top:16px">
-          <h2>Projects</h2>
-
-          <div class="project">
-            <h3>Leaf Disease Detector — July, 2025</h3>
-            <p>Technologies: HTML, CSS, JavaScript, Bootstrap. Led the full lifecycle and coordinated front-end, Flask backend and ML model teams to deliver real-time webcam predictions in a user-friendly interface.</p>
-          </div>
-
-          <div class="project">
-            <h3>Project Tracking Dashboard — Apr, 2024</h3>
-            <p>Technologies: Python, Streamlit. Developed a dashboard with KPIs, Gantt-style timeline visualizations, and downloadable reports to support project decision-making and resource tracking.</p>
-          </div>
-
-          <div class="project">
-            <h3>Program Performance Analytics Dashboard — Nov, 2023</h3>
-            <p>Technologies: Python, Streamlit, Pandas. Built interactive analytics to monitor project KPIs, surface risks and visualize trends for program managers.</p>
-          </div>
-
-        </section>
-
-        <section class="card" style="margin-top:16px">
-          <h2>Summer Training & Community Work</h2>
-          <p class="small">Board Infinity — Jul, 2024</p>
-          <p style="color:var(--muted)">Collaborated with cross-functional teams to design and maintain internal web apps and built a JavaScript digital clock project to practise dynamic UI updates.</p>
-
-          <p class="small" style="margin-top:8px">Community development project on Cleanliness — Jun, 2023</p>
-          <p style="color:var(--muted)">Led a community initiative promoting cleanliness and hygiene; engaged 50+ participants in sustainability and green-space adoption activities.</p>
-        </section>
-
-        <section class="card" style="margin-top:16px">
-          <h2>Education</h2>
-          <p style="margin:0"><strong>Lovely Professional University</strong> — B.Tech Computer Science & Engineering (Aug 2021 — May 2025). CGPA: 7.36</p>
-          <p style="margin:8px 0 0" class="small">VRC Junior College — Intermediate (April 2019 — March 2021) | 95%</p>
-          <p style="margin:8px 0 0" class="small">Dr. SRK High School — Matriculation (April 2018 — March 2019) | CGPA: 9.5</p>
-        </section>
-
-        <section class="card" style="margin-top:16px">
-          <h2>Certificates</h2>
-          <ul style="margin:0;padding-left:18px;color:var(--muted)">
-            <li>Introduction to Project Management (Coursera)</li>
-            <li>Power BI Data Visualization (Office master)</li>
-            <li>SQL for Data Science (Coursera)</li>
-          </ul>
-        </section>
-
-      </div>
-
-      <aside>
-        <section class="card">
-          <h2>Skills</h2>
-          <div class="skills">
-            <span class="chip">Python</span>
-            <span class="chip">SQL / MySQL</span>
-            <span class="chip">Data Visualization</span>
-            <span class="chip">Streamlit</span>
-            <span class="chip">HTML/CSS/JS</span>
-            <span class="chip">Bootstrap</span>
-            <span class="chip">Project Planning</span>
-            <span class="chip">MS Project</span>
-          </div>
-        </section>
-
-        <section class="card" style="margin-top:16px">
-          <h2>Achievements</h2>
-          <p class="small">• Hackathon participant — contributed to an app supporting farmers' agricultural needs.</p>
-          <p class="small" style="margin-top:8px">• Volunteer — cleanliness & environmental awareness campaigns.</p>
-          <p class="small" style="margin-top:8px">• Extracurricular competition winner (team work & creativity).</p>
-        </section>
-
-        <section class="card" style="margin-top:16px">
-          <h2>Contact</h2>
-          <p class="small">Email: <a href="mailto:Sowminijangam@gmail.com">Sowminijangam@gmail.com</a></p>
-          <p class="small">Phone: +91‑89195‑68564</p>
-          <p style="margin-top:10px"><a href="https://www.linkedin.com/in/sowminijangam" target="_blank">LinkedIn Profile</a></p>
-          <p><a href="https://github.com/sowmini-jangam" target="_blank">GitHub Repos</a></p>
-        </section>
-
-      </aside>
-    </main>
-
-    
+  <!-- HERO SECTION -->
+  <div class="hero">
+    <h1 class="fade">Sowmini Jangam</h1>
+    <p class="fade">Software Developer • Frontend • Python • Visual Analytics</p>
+    <div class="buttons fade">
+      <a href="Sowmini_Resume.pdf" target="_blank">Download Resume</a>
+      <a href="https://www.linkedin.com/in/sowminijangam" target="_blank">LinkedIn</a>
+      <a href="https://github.com/sowmini-jangam" target="_blank">GitHub</a>
+    </div>
   </div>
+
+  <!-- ABOUT -->
+  <section id="about" class="fade">
+    <h2>About Me</h2>
+    <div class="card">
+      <p>An aspiring software developer passionate about building user-friendly web applications and meaningful tech solutions. Experienced in project coordination, frontend development, ML-backed applications, and dashboard visualization.</p>
+    </div>
+  </section>
+
+  <!-- PROJECTS WITH ADVANCED EXPANDABLE DETAILS -->
+  <section id="projects" class="fade">
+    <h2>Projects</h2>
+    <div class="card" style="padding:35px;background:linear-gradient(145deg,#0f172a,#111b33);border:1px solid rgba(255,255,255,0.06)">
+
+      <!-- PROJECT 1 -->
+      <details style="background:#0d1426;padding:20px;border-radius:14px;border-left:6px solid var(--primary);margin-bottom:18px;">
+        <summary style="font-size:20px;color:var(--accent);font-weight:600;cursor:pointer;">🌿 Leaf Disease Detector (2025)</summary>
+        <div class="project-content" style="margin-top:16px;color:var(--muted);line-height:1.7;font-size:15px;">
+          <p><strong style="color:var(--accent)">Tech Stack:</strong> HTML, CSS, JavaScript, Bootstrap, Flask, Python, ML Model</p>
+
+          <p>✔ Built a <strong>real-time leaf disease scanner</strong> using webcam integration.<br>
+             ✔ Sends live frames to Flask API for ML-based disease prediction.<br>
+             ✔ Achieves fast classification using a trained CNN model.<br>
+             ✔ Designed a <strong>clean, responsive UI</strong> for instant scanning.<br>
+             ✔ Integrated probability scoring + detected-disease display.</p>
+
+          <p><strong style="color:var(--accent)">Key Features:</strong></p>
+          <ul style="margin-left:18px;line-height:1.8">
+            <li>Live webcam capture</li>
+            <li>ML classification with confidence levels</li>
+            <li>User-friendly prediction screen</li>
+            <li>Fast model inference</li>
+          </ul>
+
+          <p><strong style="color:var(--accent)">My Contribution:</strong> Frontend, camera integration, UI design, Flask API connection</p>
+        </div>
+      </details>
+
+      <!-- PROJECT 2 -->
+      <details style="background:#0d1426;padding:20px;border-radius:14px;border-left:6px solid #6aa9ff;margin-bottom:18px;">
+        <summary style="font-size:20px;color:#6aa9ff;font-weight:600;cursor:pointer;">📊 Project Tracking Dashboard (2024)</summary>
+        <div class="project-content" style="margin-top:16px;color:var(--muted);line-height:1.7;font-size:15px;">
+          <p><strong style="color:#6aa9ff">Tech Stack:</strong> Python, Streamlit, Pandas</p>
+
+          <p>✔ Developed a complete <strong>task & timeline visualization dashboard</strong> for managers.<br>
+             ✔ Automatically calculates timeline delays and workload distribution.<br>
+             ✔ Includes KPI tiles, trend charts, and colored performance indicators.</p>
+
+          <p><strong style="color:#6aa9ff">Features:</strong></p>
+          <ul style="margin-left:18px;line-height:1.8">
+            <li>Gantt-style timeline visualization</li>
+            <li>KPI blocks for progress monitoring</li>
+            <li>Team load distribution charts</li>
+            <li>Export-to-PDF reporting</li>
+          </ul>
+
+          <p><strong style="color:#6aa9ff">My Role:</strong> Dashboard UI, chart logic, report generation</p>
+        </div>
+      </details>
+
+      <!-- PROJECT 3 -->
+      <details style="background:#0d1426;padding:20px;border-radius:14px;border-left:6px solid #8fbfff;">
+        <summary style="font-size:20px;color:#8fbfff;font-weight:600;cursor:pointer;">📈 Program Performance Analytics (2023)</summary>
+        <div class="project-content" style="margin-top:16px;color:var(--muted);line-height:1.7;font-size:15px;">
+          <p><strong style="color:#8fbfff">Tech Stack:</strong> Python, Streamlit, Pandas, Matplotlib</p>
+
+          <p>✔ Built an analytics dashboard to track <strong>organizational KPIs, performance gaps, and risks</strong>.<br>
+             ✔ Added category filters, multi-year trend lines, and team-based scoring systems.</p>
+
+          <p><strong style="color:#8fbfff">Insights Provided:</strong></p>
+          <ul style="margin-left:18px;line-height:1.8">
+            <li>Performance score trends</li>
+            <li>Risk hotspots</li>
+            <li>Delay patterns</li>
+            <li>Team comparison metrics</li>
+          </ul>
+
+          <p><strong style="color:#8fbfff">My Role:</strong> Data modeling, UI design, graph creation</p>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="fade">
+    <h2>Skills</h2>
+    <div class="card skills">
+      <span>Python</span><span>JavaScript</span><span>HTML/CSS</span><span>Bootstrap</span>
+      <span>MySQL</span><span>Streamlit</span><span>Data Visualization</span>
+      <span>Project Planning</span>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="fade">
+    <h2>Education</h2>
+    <div class="card" style="background:linear-gradient(145deg,#0f172a,#111b33);border:1px solid rgba(255,255,255,0.06);padding:35px">
+
+      <div style="margin-bottom:22px;padding:20px;border-left:6px solid var(--primary);background:#0d1426;border-radius:10px">
+        <h3 style="font-size:20px;color:var(--accent);margin-bottom:6px">🎓 B.Tech — Computer Science & Engineering</h3>
+        <p style="color:var(--text);font-weight:500">Lovely Professional University (2021–2025)</p>
+        <p style="color:var(--muted);margin-top:6px">CGPA: <strong>7.36</strong></p>
+      </div>
+
+      <div style="margin-bottom:22px;padding:20px;border-left:6px solid #6aa9ff;background:#0d1426;border-radius:10px">
+        <h3 style="font-size:18px;color:#6aa9ff;margin-bottom:6px">📘 Intermediate — MPC</h3>
+        <p style="color:var(--text);font-weight:500">VRC Junior College (2019–2021)</p>
+        <p style="color:var(--muted);margin-top:6px">Percentage: <strong>95%</strong></p>
+      </div>
+
+      <div style="padding:20px;border-left:6px solid #8fbfff;background:#0d1426;border-radius:10px">
+        <h3 style="font-size:18px;color:#8fbfff;margin-bottom:6px">📗 Matriculation</h3>
+        <p style="color:var(--text);font-weight:500">Dr. SRK School (2018–2019)</p>
+        <p style="color:var(--muted);margin-top:6px">CGPA: <strong>9.5</strong></p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications" class="fade">
+    <h2>Certifications</h2>
+    <div class="card" style="padding:35px;background:linear-gradient(145deg,#0f172a,#111b33);border:1px solid rgba(255,255,255,0.06)">
+
+      <div style="display:flex;align-items:center;margin-bottom:16px;background:#0d1426;padding:16px;border-radius:12px;gap:14px;border-left:5px solid var(--primary)">
+        <span style="font-size:26px">📜</span>
+        <p style="color:var(--text)"><strong>Project Management — Coursera</strong><br><span style="color:var(--muted)">By Google • Fundamentals of project planning & execution</span></p>
+      </div>
+
+      <div style="display:flex;align-items:center;margin-bottom:16px;background:#0d1426;padding:16px;border-radius:12px;gap:14px;border-left:5px solid #6aa9ff">
+        <span style="font-size:26px">📊</span>
+        <p style="color:var(--text)"><strong>Power BI Data Visualization — Office Master</strong><br><span style="color:var(--muted)">Hands-on dashboards, DAX basics & report design</span></p>
+      </div>
+
+      <div style="display:flex;align-items:center;background:#0d1426;padding:16px;border-radius:12px;gap:14px;border-left:5px solid #8fbfff">
+        <span style="font-size:26px">🗄️</span>
+        <p style="color:var(--text)"><strong>SQL for Data Science — Coursera</strong><br><span style="color:var(--muted)">Joins, queries, filtering, data extraction & analytics</span></p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="certifications" class="fade">
+    <h2>Certifications</h2>
+    <div class="card">
+      <p>• Project Management — Coursera</p>
+      <p>• Power BI Visualization — Office Master</p>
+      <p>• SQL for Data Science — Coursera</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="fade">
+    <h2>Contact</h2>
+    <div class="card">
+      <p>Email: <a href="mailto:Sowminijangam@gmail.com" style="color:var(--accent)">Sowminijangam@gmail.com</a></p>
+      <p>Phone: +91-89195-68564</p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/sowminijangam" style="color:var(--accent)" target="_blank">Profile</a></p>
+      <p>GitHub: <a href="https://github.com/sowmini-jangam" style="color:var(--accent)" target="_blank">Repositories</a></p>
+    </div>
+  </section>
+
+  <footer style="text-align:center;color:var(--muted);padding:30px">© 2025 Sowmini Jangam — Portfolio</footer>
+
 </body>
 </html>
